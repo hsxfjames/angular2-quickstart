@@ -2,7 +2,7 @@ import { browser, element, by } from 'protractor';
 
 describe('QuickStart E2E Tests', function () {
 
-  let expectedMsg = 'Hello Angular';
+  let expectedMsg = 'Hello Angular World!';
 
   beforeEach(function () {
     browser.get('');
