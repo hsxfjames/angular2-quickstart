@@ -11,25 +11,30 @@ import 'rxjs/add/operator/switchMap';
   moduleId: module.id,
   selector: 'hero-detail',
   templateUrl: 'hero-detail.component.html',
-  styleUrls: ['hero-detail.component.css'],
+  styleUrls: [ 'hero-detail.component.css' ],
 })
 export class HeroDetailComponent implements OnInit {
   @Input('targetHero')
   targetHero: Hero;
-  
+
   constructor(
     private heroService: HeroService,
     private route: ActivatedRoute,
     private location: Location
   ) { }
-  
+
   ngOnInit(): void {
     this.route.params
       .switchMap((params: Params) => this.heroService.getHero(+params['id']))
       .subscribe(hero => this.targetHero = hero);
   }
-  
+
   goBack(): void {
     this.location.back();
+  }
+
+  save(): void {
+    this.heroService.update(this.targetHero)
+      .then(() => this.goBack());
   }
 }

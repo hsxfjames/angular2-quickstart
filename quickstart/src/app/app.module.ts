@@ -1,7 +1,7 @@
 import { NgModule }             from '@angular/core';
 import { BrowserModule }        from '@angular/platform-browser';
 import { FormsModule }          from '@angular/forms';
-import { RouterModule, Routes } from '@angular/router';
+import { HttpModule }           from '@angular/http';
 
 import { AppRoutingModule }     from './app-routing.module';
 
@@ -10,12 +10,16 @@ import { DashboardComponent }   from '../pages/dashboard/dashboard.component';
 import { HeroListComponent }    from '../pages/hero-list/hero-list.component';
 import { HeroDetailComponent }  from '../pages/hero-detail/hero-detail.component';
 
+import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { InMemoryDataService }  from '../providers/in-memory-data/in-memory-data.service';
 import { HeroService }          from '../providers/heroes/hero.service';
 
 @NgModule({
   imports:      [
     BrowserModule,
     FormsModule,
+    HttpModule,
+    InMemoryWebApiModule.forRoot(InMemoryDataService),
     AppRoutingModule
   ],
   declarations: [
