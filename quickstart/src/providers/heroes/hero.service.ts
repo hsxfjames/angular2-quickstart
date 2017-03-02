@@ -1,14 +1,14 @@
+import 'rxjs/add/operator/toPromise';
+
 import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
-
-import 'rxjs/add/operator/toPromise';
 
 import { Hero } from './heroes';
 
 @Injectable()
 export class HeroService {
 
-  private heroesUri = 'app/data'; // uri 就是imd CreateDb时返回对象的键值
+  private heroesUri = 'app/heroesData'; // uri 就是imd CreateDb时返回对象的键值
   private headers = new Headers({'Content-Type': 'application/json'});
 
   constructor(
@@ -36,7 +36,7 @@ export class HeroService {
   }
 
   getHeroesSlowly(): Promise<Hero[]> {
-    return new Promise<Hero[]>(resolve => setTimeout(resolve, 2000))
+    return new Promise<Hero[]>(resolve => setTimeout(resolve, 800))
            .then(() => this.getHeroes());
   }
 
@@ -54,8 +54,8 @@ export class HeroService {
       .catch(this.handleError);
   }
 
-  delete(id: number): Promise<void> {
-    const uri = `${this.heroesUri}/${id}`;
+  delete(heroId: number): Promise<void> {
+    const uri = `${this.heroesUri}/${heroId}`;
     return this.http.delete(uri, { headers: this.headers })
       .toPromise()
       .then(() => null)

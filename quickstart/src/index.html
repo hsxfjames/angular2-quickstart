@@ -15,11 +15,13 @@
 
     <script src="systemjs.config.js"></script>
     <script>
-      System.import('main.js').catch(function(err){ console.error(err); });
+      System.import('main.js')
+        .then(function(msg){ console.info(msg) })
+        .catch(function(err){ console.error(err); });
     </script>
   </head>
 
   <body>
     <my-app>Loading AppComponent content here ...</my-app>
   </body>
-</html>
+</html> 
